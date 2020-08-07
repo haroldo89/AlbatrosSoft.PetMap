@@ -1,0 +1,19 @@
+﻿@using System.Configuration;
+@{
+    //Nombre de la aplicacion.
+    string ApplicationName = ConfigurationManager.AppSettings["ApplicationName"];
+}
+<div id="footerContent">
+    <table style="width: 100%; height: 100%; vertical-align: middle">
+        <tr>
+            <td style="width: 50%;">
+                @*<img alt="" src="~/Content/Images/Login/wizenzImg.png" style="height: 45pt;" />*@
+            </td>
+            <td style="text-align: right; width: 50%; color: #014282">
+                <label style="font: bolder 36pt Calibri; margin: 0">PetMap</label>
+                <label style="font: bolder 12pt Calibri; margin: 0">@ApplicationName</label>
+            </td>
+        </tr>
+    </table>
+</div>
+

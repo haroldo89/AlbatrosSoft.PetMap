@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PetMapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PetMap.dbo.AppService' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+          <Property Name="ChangePasswordDate" Type="datetime" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ContactId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppUserRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceId" Type="int" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identification" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdentificationTypeId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ContactTypeId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ExternalCode" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="ContactType">
+          <Key>
+            <PropertyRef Name="ContactTypeId" />
+          </Key>
+          <Property Name="ContactTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Identification" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdentificationTypeId" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="LogoIconName" Type="varchar" MaxLength="80" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="BillingStatusId" Type="int" Nullable="false" />
+          <Property Name="DealerId" Type="int" Nullable="false" />
+          <Property Name="CityId" Type="int" />
+        </EntityType>
+        <EntityType Name="CustomerBillingStatus">
+          <Key>
+            <PropertyRef Name="BillingStatusId" />
+          </Key>
+          <Property Name="BillingStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Alias" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerId" />
+          </Key>
+          <Property Name="DealerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Identification" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="PrincipalContactName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="PrincipalContactPhone" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="LogoIconName" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="IdentificationType">
+          <Key>
+            <PropertyRef Name="IdentificationTypeId" />
+          </Key>
+          <Property Name="IdentificationTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Alias" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_APPUSER_REFERENCE_APPUSERR">
+          <End Role="AppUserRole" Type="Self.AppUserRole" Multiplicity="1" />
+          <End Role="AppUser" Type="Self.AppUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="AppUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPUSER_REFERENCE_CONTACT">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="1" />
+          <End Role="AppUser" Type="Self.AppUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="AppUser">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_REFERENCE_CONTACTT">
+          <End Role="ContactType" Type="Self.ContactType" Multiplicity="1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactType">
+              <PropertyRef Name="ContactTypeId" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="ContactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_REFERENCE_CUSTOMER">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_REFERENCE_IDENTIFI">
+          <End Role="IdentificationType" Type="Self.IdentificationType" Multiplicity="1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IdentificationType">
+              <PropertyRef Name="IdentificationTypeId" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="IdentificationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_REFERENCE_CUSTOMER">
+          <End Role="CustomerBillingStatus" Type="Self.CustomerBillingStatus" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerBillingStatus">
+              <PropertyRef Name="BillingStatusId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="BillingStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_REFERENCE_DEALER">
+          <End Role="Dealer" Type="Self.Dealer" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealer">
+              <PropertyRef Name="DealerId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="DealerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_REFERENCE_IDENTIFI">
+          <End Role="IdentificationType" Type="Self.IdentificationType" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IdentificationType">
+              <PropertyRef Name="IdentificationTypeId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IdentificationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PetMapModelStoreContainer">
+          <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppUserRole" EntityType="Self.AppUserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactType" EntityType="Self.ContactType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerBillingStatus" EntityType="Self.CustomerBillingStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dealer" EntityType="Self.Dealer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IdentificationType" EntityType="Self.IdentificationType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_APPUSER_REFERENCE_APPUSERR" Association="Self.FK_APPUSER_REFERENCE_APPUSERR">
+            <End Role="AppUserRole" EntitySet="AppUserRole" />
+            <End Role="AppUser" EntitySet="AppUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPUSER_REFERENCE_CONTACT" Association="Self.FK_APPUSER_REFERENCE_CONTACT">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="AppUser" EntitySet="AppUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_REFERENCE_CONTACTT" Association="Self.FK_CONTACT_REFERENCE_CONTACTT">
+            <End Role="ContactType" EntitySet="ContactType" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_REFERENCE_CUSTOMER" Association="Self.FK_CONTACT_REFERENCE_CUSTOMER">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_REFERENCE_IDENTIFI" Association="Self.FK_CONTACT_REFERENCE_IDENTIFI">
+            <End Role="IdentificationType" EntitySet="IdentificationType" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_REFERENCE_CUSTOMER" Association="Self.FK_CUSTOMER_REFERENCE_CUSTOMER">
+            <End Role="CustomerBillingStatus" EntitySet="CustomerBillingStatus" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_REFERENCE_DEALER" Association="Self.FK_CUSTOMER_REFERENCE_DEALER">
+            <End Role="Dealer" EntitySet="Dealer" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_REFERENCE_IDENTIFI" Association="Self.FK_CUSTOMER_REFERENCE_IDENTIFI">
+            <End Role="IdentificationType" EntitySet="IdentificationType" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="PetMapModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="PetMapModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppUserSet" EntityType="PetMapModel.AppUser" />
+          <EntitySet Name="AppUserRoleSet" EntityType="PetMapModel.AppUserRole" />
+          <EntitySet Name="ContactSet" EntityType="PetMapModel.Contact" />
+          <EntitySet Name="ContactTypeSet" EntityType="PetMapModel.ContactType" />
+          <EntitySet Name="CustomerSet" EntityType="PetMapModel.Customer" />
+          <EntitySet Name="CustomerBillingStatusSet" EntityType="PetMapModel.CustomerBillingStatus" />
+          <EntitySet Name="DealerSet" EntityType="PetMapModel.Dealer" />
+          <EntitySet Name="IdentificationTypeSet" EntityType="PetMapModel.IdentificationType" />
+          <AssociationSet Name="FK_APPUSER_REFERENCE_APPUSERR1" Association="PetMapModel.FK_APPUSER_REFERENCE_APPUSERR1">
+            <End Role="AppUserRole1" EntitySet="AppUserRoleSet" />
+            <End Role="AppUser1" EntitySet="AppUserSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPUSER_REFERENCE_CONTACT1" Association="PetMapModel.FK_APPUSER_REFERENCE_CONTACT1">
+            <End Role="Contact1" EntitySet="ContactSet" />
+            <End Role="AppUser1" EntitySet="AppUserSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_REFERENCE_CONTACTT1" Association="PetMapModel.FK_CONTACT_REFERENCE_CONTACTT1">
+            <End Role="ContactType1" EntitySet="ContactTypeSet" />
+            <End Role="Contact1" EntitySet="ContactSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_REFERENCE_CUSTOMER1" Association="PetMapModel.FK_CONTACT_REFERENCE_CUSTOMER1">
+            <End Role="Customer1" EntitySet="CustomerSet" />
+            <End Role="Contact1" EntitySet="ContactSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACT_REFERENCE_IDENTIFI1" Association="PetMapModel.FK_CONTACT_REFERENCE_IDENTIFI1">
+            <End Role="IdentificationType1" EntitySet="IdentificationTypeSet" />
+            <End Role="Contact1" EntitySet="ContactSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_REFERENCE_CUSTOMER1" Association="PetMapModel.FK_CUSTOMER_REFERENCE_CUSTOMER1">
+            <End Role="CustomerBillingStatus1" EntitySet="CustomerBillingStatusSet" />
+            <End Role="Customer1" EntitySet="CustomerSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_REFERENCE_DEALER1" Association="PetMapModel.FK_CUSTOMER_REFERENCE_DEALER1">
+            <End Role="Dealer1" EntitySet="DealerSet" />
+            <End Role="Customer1" EntitySet="CustomerSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_REFERENCE_IDENTIFI1" Association="PetMapModel.FK_CUSTOMER_REFERENCE_IDENTIFI1">
+            <End Role="IdentificationType1" EntitySet="IdentificationTypeSet" />
+            <End Role="Customer1" EntitySet="CustomerSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChangePasswordDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="ContactId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AppUserRole" Relationship="PetMapModel.FK_APPUSER_REFERENCE_APPUSERR1" FromRole="AppUser1" ToRole="AppUserRole1" />
+          <NavigationProperty Name="Contact" Relationship="PetMapModel.FK_APPUSER_REFERENCE_CONTACT1" FromRole="AppUser1" ToRole="Contact1" />
+        </EntityType>
+        <EntityType Name="AppUserRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceId" Type="Int32" />
+          <NavigationProperty Name="AppUser" Relationship="PetMapModel.FK_APPUSER_REFERENCE_APPUSERR1" FromRole="AppUserRole1" ToRole="AppUser1" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identification" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdentificationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="ContactTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="ExternalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AppUser" Relationship="PetMapModel.FK_APPUSER_REFERENCE_CONTACT1" FromRole="Contact1" ToRole="AppUser1" />
+          <NavigationProperty Name="ContactType" Relationship="PetMapModel.FK_CONTACT_REFERENCE_CONTACTT1" FromRole="Contact1" ToRole="ContactType1" />
+          <NavigationProperty Name="Customer" Relationship="PetMapModel.FK_CONTACT_REFERENCE_CUSTOMER1" FromRole="Contact1" ToRole="Customer1" />
+          <NavigationProperty Name="IdentificationType" Relationship="PetMapModel.FK_CONTACT_REFERENCE_IDENTIFI1" FromRole="Contact1" ToRole="IdentificationType1" />
+        </EntityType>
+        <EntityType Name="ContactType">
+          <Key>
+            <PropertyRef Name="ContactTypeId" />
+          </Key>
+          <Property Name="ContactTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Contact" Relationship="PetMapModel.FK_CONTACT_REFERENCE_CONTACTT1" FromRole="ContactType1" ToRole="Contact1" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Identification" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdentificationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LogoIconName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="BillingStatusId" Type="Int32" Nullable="false" />
+          <Property Name="DealerId" Type="Int32" Nullable="false" />
+          <Property Name="CityId" Type="Int32" />
+          <NavigationProperty Name="Contact" Relationship="PetMapModel.FK_CONTACT_REFERENCE_CUSTOMER1" FromRole="Customer1" ToRole="Contact1" />
+          <NavigationProperty Name="CustomerBillingStatus" Relationship="PetMapModel.FK_CUSTOMER_REFERENCE_CUSTOMER1" FromRole="Customer1" ToRole="CustomerBillingStatus1" />
+          <NavigationProperty Name="Dealer" Relationship="PetMapModel.FK_CUSTOMER_REFERENCE_DEALER1" FromRole="Customer1" ToRole="Dealer1" />
+          <NavigationProperty Name="IdentificationType" Relationship="PetMapModel.FK_CUSTOMER_REFERENCE_IDENTIFI1" FromRole="Customer1" ToRole="IdentificationType1" />
+        </EntityType>
+        <EntityType Name="CustomerBillingStatus">
+          <Key>
+            <PropertyRef Name="BillingStatusId" />
+          </Key>
+          <Property Name="BillingStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="PetMapModel.FK_CUSTOMER_REFERENCE_CUSTOMER1" FromRole="CustomerBillingStatus1" ToRole="Customer1" />
+        </EntityType>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerId" />
+          </Key>
+          <Property Name="DealerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Identification" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PrincipalContactName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PrincipalContactPhone" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="LogoIconName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="PetMapModel.FK_CUSTOMER_REFERENCE_DEALER1" FromRole="Dealer1" ToRole="Customer1" />
+        </EntityType>
+        <EntityType Name="IdentificationType">
+          <Key>
+            <PropertyRef Name="IdentificationTypeId" />
+          </Key>
+          <Property Name="IdentificationTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Contact" Relationship="PetMapModel.FK_CONTACT_REFERENCE_IDENTIFI1" FromRole="IdentificationType1" ToRole="Contact1" />
+          <NavigationProperty Name="Customer" Relationship="PetMapModel.FK_CUSTOMER_REFERENCE_IDENTIFI1" FromRole="IdentificationType1" ToRole="Customer1" />
+        </EntityType>
+        <Association Name="FK_APPUSER_REFERENCE_APPUSERR1">
+          <End Type="PetMapModel.AppUserRole" Role="AppUserRole1" Multiplicity="1" />
+          <End Type="PetMapModel.AppUser" Role="AppUser1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppUserRole1">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="AppUser1">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPUSER_REFERENCE_CONTACT1">
+          <End Type="PetMapModel.Contact" Role="Contact1" Multiplicity="1" />
+          <End Type="PetMapModel.AppUser" Role="AppUser1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact1">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="AppUser1">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_REFERENCE_CONTACTT1">
+          <End Type="PetMapModel.ContactType" Role="ContactType1" Multiplicity="1" />
+          <End Type="PetMapModel.Contact" Role="Contact1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactType1">
+              <PropertyRef Name="ContactTypeId" />
+            </Principal>
+            <Dependent Role="Contact1">
+              <PropertyRef Name="ContactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_REFERENCE_CUSTOMER1">
+          <End Type="PetMapModel.Customer" Role="Customer1" Multiplicity="1" />
+          <End Type="PetMapModel.Contact" Role="Contact1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer1">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Contact1">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACT_REFERENCE_IDENTIFI1">
+          <End Type="PetMapModel.IdentificationType" Role="IdentificationType1" Multiplicity="1" />
+          <End Type="PetMapModel.Contact" Role="Contact1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IdentificationType1">
+              <PropertyRef Name="IdentificationTypeId" />
+            </Principal>
+            <Dependent Role="Contact1">
+              <PropertyRef Name="IdentificationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_REFERENCE_CUSTOMER1">
+          <End Type="PetMapModel.CustomerBillingStatus" Role="CustomerBillingStatus1" Multiplicity="1" />
+          <End Type="PetMapModel.Customer" Role="Customer1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerBillingStatus1">
+              <PropertyRef Name="BillingStatusId" />
+            </Principal>
+            <Dependent Role="Customer1">
+              <PropertyRef Name="BillingStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_REFERENCE_DEALER1">
+          <End Type="PetMapModel.Dealer" Role="Dealer1" Multiplicity="1" />
+          <End Type="PetMapModel.Customer" Role="Customer1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealer1">
+              <PropertyRef Name="DealerId" />
+            </Principal>
+            <Dependent Role="Customer1">
+              <PropertyRef Name="DealerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CUSTOMER_REFERENCE_IDENTIFI1">
+          <End Type="PetMapModel.IdentificationType" Role="IdentificationType1" Multiplicity="1" />
+          <End Type="PetMapModel.Customer" Role="Customer1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IdentificationType1">
+              <PropertyRef Name="IdentificationTypeId" />
+            </Principal>
+            <Dependent Role="Customer1">
+              <PropertyRef Name="IdentificationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="PetMapModel" />
+        <Alias Key="Target" Value="PetMapModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="PetMapModelContainer" StorageEntityContainer="PetMapModelStoreContainer">
+          <EntitySetMapping Name="AppUserSet">
+            <EntityTypeMapping TypeName="PetMapModel.AppUser">
+              <MappingFragment StoreEntitySet="AppUser">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ChangePasswordDate" ColumnName="ChangePasswordDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUserRoleSet">
+            <EntityTypeMapping TypeName="PetMapModel.AppUserRole">
+              <MappingFragment StoreEntitySet="AppUserRole">
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactSet">
+            <EntityTypeMapping TypeName="PetMapModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="ExternalCode" ColumnName="ExternalCode" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ContactTypeId" ColumnName="ContactTypeId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IdentificationTypeId" ColumnName="IdentificationTypeId" />
+                <ScalarProperty Name="Identification" ColumnName="Identification" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactTypeSet">
+            <EntityTypeMapping TypeName="PetMapModel.ContactType">
+              <MappingFragment StoreEntitySet="ContactType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactTypeId" ColumnName="ContactTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerSet">
+            <EntityTypeMapping TypeName="PetMapModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+                <ScalarProperty Name="BillingStatusId" ColumnName="BillingStatusId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LogoIconName" ColumnName="LogoIconName" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IdentificationTypeId" ColumnName="IdentificationTypeId" />
+                <ScalarProperty Name="Identification" ColumnName="Identification" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerBillingStatusSet">
+            <EntityTypeMapping TypeName="PetMapModel.CustomerBillingStatus">
+              <MappingFragment StoreEntitySet="CustomerBillingStatus">
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BillingStatusId" ColumnName="BillingStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealerSet">
+            <EntityTypeMapping TypeName="PetMapModel.Dealer">
+              <MappingFragment StoreEntitySet="Dealer">
+                <ScalarProperty Name="LogoIconName" ColumnName="LogoIconName" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="PrincipalContactPhone" ColumnName="PrincipalContactPhone" />
+                <ScalarProperty Name="PrincipalContactName" ColumnName="PrincipalContactName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Identification" ColumnName="Identification" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IdentificationTypeSet">
+            <EntityTypeMapping TypeName="PetMapModel.IdentificationType">
+              <MappingFragment StoreEntitySet="IdentificationType">
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdentificationTypeId" ColumnName="IdentificationTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

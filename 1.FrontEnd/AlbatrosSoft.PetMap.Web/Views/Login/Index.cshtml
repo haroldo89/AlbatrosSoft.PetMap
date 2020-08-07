@@ -1,0 +1,59 @@
+﻿@model AppUser
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Protekto - Viajes</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    @*<link rel="shortcut icon" href="<%= Page.ResolveUrl(" ~/favicon.png")%>" />*@
+
+    <link href="~/Content/Views/Login/Site.css" rel="stylesheet" />
+    <link href="~/Content/Views/Login/layout.css" rel="stylesheet" />
+    <link href="~/Content/Views/Login/themes/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/Views/Login/jquery-2.2.2.js"></script>
+    <script src="~/Scripts/Views/Login/jquery-migrate-1.2.1.js"></script>
+    <script src="~/Scripts/Views/Login/modernizr.custom.js"></script>
+    <script src="~/Scripts/Views/Login/responsive.js"></script>
+</head>
+<body>
+
+    @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { id = "form1" }))
+    {
+        <div class="main-content">
+            <div class="main-content-login">
+                <div class="overlay"></div>
+                <div class="form-bg">
+                    <div class="form">
+                        @{
+                            if (this.ViewBag.resultMessage != null)
+                            {
+                                <label ID="lblAlertMsg" class="alertMsg">@ViewBag.resultMessage</label>
+                            }
+                        }
+                        <div class="space">
+                            <p>
+                                @Html.TextBoxFor(u => u.Username, new { id = "txtUserName", name = "name", placeholder = "User", required = "required" })
+                            </p>
+                            <p>
+                                @Html.PasswordFor(u => u.Password, new { id = "txtPassword", name = "password", placeholder = "Password", required = "required" })
+                            </p>
+                            <input type="submit" id="submitLogin" class="submitLogin" value="Login" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+                            }
+    <footer class="footer text-center">
+        <p class="text-muted">@DateTime.Now.Year - Pacific CO [Powered by Albatros Soft]</p>
+    </footer>
+
+
+
+</body>
+</html>

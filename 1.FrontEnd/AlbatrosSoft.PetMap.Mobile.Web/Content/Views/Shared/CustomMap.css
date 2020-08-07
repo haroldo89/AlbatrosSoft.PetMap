@@ -1,0 +1,120 @@
+﻿.ui-autocomplete
+{
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    z-index: 1;
+}
+/* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+* html .ui-autocomplete
+{
+    height: 200px;
+}
+
+.CustomTextPushpin
+{
+    overflow: visible !important;
+}
+
+    .CustomTextPushpin img
+    {
+        text-align: center;
+        /*align-content: center;*/
+    }
+
+    .CustomTextPushpin div
+    {
+        color: black !important;
+        font-size: 9pt !important;
+        background-color: white !important;
+        font-family: Calibri !important;
+        text-align: center !important;
+        width: auto !important;
+        height: 10pt !important;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+/*
+* CSS styles para infobox.
+*/
+
+.infobox
+{
+    position: relative;
+    width: auto;
+    height: auto;
+    background-color: white;
+    border: 1px solid rgb(136, 136, 136);
+    padding-left: 3px;
+    padding-right: 3px;
+    white-space: nowrap;
+    z-index: 9999;
+}
+
+.infobox_close
+{
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    border: none;
+}
+
+.infobox_content
+{
+    font-family: Calibri;
+    font-size: 10pt;
+}
+
+.infobox_content_divUl
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+    .infobox_content_divUl ul
+    {
+        padding: 0px;
+        margin: 0px 0px 5px;
+        width: 100%;
+        background: White;
+        color: #133238;
+        list-style-type: none;
+        cursor: default;
+    }
+
+        .infobox_content_divUl ul li
+        {
+            color: #133238;
+            padding: 1px 2px 1px 5px;
+            background: White;
+            font: normal 10pt Arial;
+        }
+
+            .infobox_content_divUl ul li:hover
+            {
+                background: Gray;
+                color: white;
+                cursor: pointer;
+            }
+
+.infobox_pointer
+{
+    width: 33px;
+    height: 38px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    left: 20px;
+    top: -1px;
+}
+
+.infobox_title
+{
+    font-weight: bold;
+    font-size: 15px;
+}

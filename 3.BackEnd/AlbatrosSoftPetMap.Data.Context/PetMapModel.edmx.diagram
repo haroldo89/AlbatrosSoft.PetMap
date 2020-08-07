@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="32b8017d7f114b94a3ab2a7751b93ef7" Name="Diagram1" ZoomLevel="94" >
+        <EntityTypeShape EntityType="PetMapModel.AppUser" Width="1.5" PointX="8.875" PointY="4" />
+        <EntityTypeShape EntityType="PetMapModel.AppUserRole" Width="1.5" PointX="6.625" PointY="0.625" />
+        <EntityTypeShape EntityType="PetMapModel.Contact" Width="1.5" PointX="3.625" PointY="3.5" />
+        <EntityTypeShape EntityType="PetMapModel.ContactType" Width="1.5" PointX="1.375" PointY="1.75" />
+        <EntityTypeShape EntityType="PetMapModel.Customer" Width="1.5" PointX="6.625" PointY="3.375" />
+        <EntityTypeShape EntityType="PetMapModel.CustomerBillingStatus" Width="1.5" PointX="4.375" PointY="0.5" />
+        <EntityTypeShape EntityType="PetMapModel.Dealer" Width="1.5" PointX="4.375" PointY="9.125" />
+        <EntityTypeShape EntityType="PetMapModel.IdentificationType" Width="1.5" PointX="1.375" PointY="4.625" />
+        <AssociationConnector Association="PetMapModel.FK_APPUSER_REFERENCE_APPUSERR1" />
+        <AssociationConnector Association="PetMapModel.FK_APPUSER_REFERENCE_CONTACT1" />
+        <AssociationConnector Association="PetMapModel.FK_CONTACT_REFERENCE_CONTACTT1" />
+        <AssociationConnector Association="PetMapModel.FK_CONTACT_REFERENCE_CUSTOMER1" />
+        <AssociationConnector Association="PetMapModel.FK_CONTACT_REFERENCE_IDENTIFI1" />
+        <AssociationConnector Association="PetMapModel.FK_CUSTOMER_REFERENCE_CUSTOMER1" />
+        <AssociationConnector Association="PetMapModel.FK_CUSTOMER_REFERENCE_DEALER1" />
+        <AssociationConnector Association="PetMapModel.FK_CUSTOMER_REFERENCE_IDENTIFI1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

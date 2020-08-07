@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{371C9769-E8BA-4784-A4A4-D31A9134A0D8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AlbatrosSoft.PetMap.Domain.Dto</RootNamespace>
+    <AssemblyName>AlbatrosSoft.PetMap.Domain.Dto</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlbatrosSoft.PetMap.Domain.Dto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlbatrosSoft.PetMap.Domain.Dto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppUser.Designer.cs">
+      <DependentUpon>AlbatrosSoft.PetMap.Domain.Dto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppUserRole.Designer.cs">
+      <DependentUpon>AlbatrosSoft.PetMap.Domain.Dto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.Designer.cs">
+      <DependentUpon>AlbatrosSoft.PetMap.Domain.Dto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactType.Designer.cs">
+      <DependentUpon>AlbatrosSoft.PetMap.Domain.Dto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.Designer.cs">
+      <DependentUpon>AlbatrosSoft.PetMap.Domain.Dto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerBillingStatus.Designer.cs">
+      <DependentUpon>AlbatrosSoft.PetMap.Domain.Dto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dealer.Designer.cs">
+      <DependentUpon>AlbatrosSoft.PetMap.Domain.Dto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeoreferencesModel\CheckPoint.cs" />
+    <Compile Include="GeoreferencesModel\Geofence.cs" />
+    <Compile Include="GeoreferencesModel\GeoreferencePropertySelectList.cs" />
+    <Compile Include="GeoreferencesModel\LocationPoint.cs" />
+    <Compile Include="GeoreferencesModel\Route.cs" />
+    <Compile Include="GeoreferencesModel\RouteCustomProperty.cs" />
+    <Compile Include="GeoreferencesModel\TripScalePoint.cs" />
+    <Compile Include="IdentificationType.Designer.cs">
+      <DependentUpon>AlbatrosSoft.PetMap.Domain.Dto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AlbatrosSoft.PetMap.Domain.Dto.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AlbatrosSoft.PetMap.Domain.Dto.cs</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

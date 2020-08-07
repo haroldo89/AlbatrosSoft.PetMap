@@ -1,0 +1,183 @@
+﻿@model AppUser
+
+@using System.Configuration;
+@*@using Microsoft.Azure;*@
+@using System.Configuration;
+@using System.Globalization;
+@using System.Threading;
+@using System.Resources;
+@using System.Collections;
+@{
+    Layout = null;
+    //Nombre de la aplicacion.
+    string ApplicationName = ConfigurationManager.AppSettings["ApplicationName"];
+    //Parametros de configuracion
+    //string CustomerSuportEmailAccount = CloudConfigurationManager.GetSetting("CustomerSuportEmailAccount");
+    //string CustomerSuportPhoneNumber = CloudConfigurationManager.GetSetting("CustomerSuportPhoneNumber");
+    string CustomerSuportEmailAccount = string.Empty; 
+    string CustomerSuportPhoneNumber = string.Empty;   
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ApplicationName</title>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/images/WiZENZNavSmall.png" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/Content/themes/themeBase.css" rel="stylesheet" />
+    <link href="~/Content/themes/jquery.mobile.icons.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/jquery.mobile.structure-1.4.5.min.css" rel="stylesheet" />
+    <link href="~/Scripts/validationEngine/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.js"></script>
+    <script>
+        $(document).on("mobileinit", function () {
+            $.mobile.ajaxEnabled = false;
+        });
+    </script>
+    <script type="text/javascript" src="~/Scripts/jquery.mobile-1.4.5.js"></script>
+    <script type="text/javascript">
+        @{
+            Layout = null;
+            // Get a set of resources appropriate to the culture defined by the browser
+            ResourceSet resourceSet = @Resources.LanguageSettings.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+        }
+
+        // Define the empty object in javascript
+        var Resources = {};
+        @foreach (DictionaryEntry res in resourceSet)
+        {
+            // Create a property on the javascript object for each text resource
+            @:Resources.@res.Key = "@Html.Raw(HttpUtility.JavaScriptStringEncode(res.Value.ToString()))";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+    </script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/validationEngine/jquery.validationEngine.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/validationEngine/jquery.validationEngine-languageSettings.js")"></script>
+    <script type="text/javascript" src="~/Scripts/CommonUtils/CommonUtils.js"></script>
+    <script type="text/javascript" src="~/Scripts/Views/Login/Index.js"></script>
+    <script>
+        $(document).ready(function () {
+            Login.initializeComponents();
+        });
+    </script>
+</head>
+<body>
+    <div id="LoginPage" data-role="page" data-theme="a">
+        <div data-role="header" data-position="fixed" style="background: #E1F4FB; color: white;">
+            @Html.Partial("~/Views/Login/_LoginHeader.cshtml")
+        </div>
+        <div class="page-content">
+            <div data-role="content">
+                @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { id = "frmLogin", data_ajax = "false" }))
+                {
+                    <ul data-role="listview" data-inset="true">
+                        <li data-role="fieldcontain" style="white-space: normal;">
+                            <table style="width: 100%; text-align: center; font-size: 20pt; color: #376092; font-weight: bolder;">
+                                <tr>
+                                    <td>Ingreso de Usuario</td>
+                                </tr>
+                            </table>
+                        </li>
+                        @if (TempData["ResultMessage"] != null && !string.IsNullOrEmpty((String)TempData["ResultMessage"]))
+                        {
+                            <li data-role="fieldcontain" style="white-space: normal;">
+                                <table style="width: 100%; font: bold 15pt Calibri; text-align: center; color: #C00000">
+                                    <tr>
+                                        <td>
+                                            <div>@Html.Raw((String)TempData["ResultMessage"])</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        }
+                        @if (ViewBag.resultMessage != null && !string.IsNullOrEmpty((String)ViewBag.resultMessage))
+                        {
+                            <li data-role="fieldcontain" style="white-space: normal;">
+                                <table style="width: 100%; font: bold 15pt Calibri; text-align: center; color: #C00000">
+                                    <tr>
+                                        <td>
+                                            <div>@Html.Raw((String)ViewBag.resultMessage)</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        }
+                        <li data-role="fieldcontain">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Usuario
+                                        </label>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>@Html.TextBoxFor(m => m.Username, new { id = "txtUsername", @class = "validate[required]" })</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Contraseña
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.PasswordFor(m => m.Password, new { id = "txtPassword", @class = "validate[required]" })</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <a href="#dialogPage" data-rel="dialog" id="lnkUser" style="font: normal 13pt Calibri; color: #376092">¿Olvidó su <strong>contraseña</strong>?</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="submit" data-role="button" value="Entrar" id="btnLogin" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="text-align: right;">
+                                        <img alt="" src="~/Content/Images/Login/azureLogo.png" style="height: 20pt;" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" style="background: #E1F4FB; color: #376092;">
+            @Html.Partial("~/Views/Login/_LoginFooter.cshtml")
+        </div>
+    </div>
+    <div data-role="page" id="dialogPage">
+        <div data-role="header">
+            <h2>Autenticacion de Usuario</h2>
+        </div>
+        <div role="main" class="ui-content">
+            <p>
+                Estimado usuario, favor contactar al departamento de soporte técnico de WiZenz:
+                <br />
+                E-mail:<a style="text-decoration-color: black; text-decoration-line: underline">@CustomerSuportEmailAccount</a>
+                <br />
+                Tel: @CustomerSuportPhoneNumber
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
